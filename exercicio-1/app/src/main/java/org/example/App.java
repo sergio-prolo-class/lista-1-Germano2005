@@ -4,11 +4,50 @@
 package org.example;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+
+    public static boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");  // Verifica inteiros e decimais
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        int i;
+        for (i = 0; i < args.length; i++) { // for para verificar todos os argumentos
+            if (args[i] == args[0]) { // conferir arg[0] para ver se é uma forma
+                if (args[0].equals("triangulo") || args[0].equals("losangulo") || args[0].equals("retangulo")) {
+                    String forma = args[0];
+                    if (forma.equals("retangulo")) {
+                        if (isNumeric(args[2])) { // conferir a arg[2] para ve se é a dimensão do retangulo
+                            int alturaRetangulo = Integer.parseInt(args[1]);
+                            System.out.println(alturaRetangulo);
+                        } else {
+                            System.out.println("Digite novamente conforme a ordem: forma/dimensões");
+                            break;
+                        }
+                    }
+                    System.out.println(forma);
+                }
+
+            } else {
+                System.out.println("Digite novamente conforme a ordem: forma/dimensões");
+                break;
+            }
+        }
+        if (args[i] == args[1]) { // conferir arg[1] para ve se é uma dimensão
+            if (isNumeric(args[1])) {
+                int dimensoes = Integer.parseInt(args[1]);
+                if (args[0] == "losangulo" && (dimensoes % 2) == 1) {
+                    System.out.println("É obrigatório que as dimensões do losangulo sejam ímpares");
+                } else {
+                    System.out.println(dimensoes);
+                }
+            } else {
+                System.out.println("Digite novamente conforme a ordem: forma/dimensões");
+            }
+
+        }
+
+
     }
+
+
 }

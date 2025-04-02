@@ -3,49 +3,98 @@
  */
 package org.example;
 
+import java.util.Objects;
+
 public class App {
+
+    public static void main(String[] args) {
+        int i;
+        String forma = " ";
+        int dimensoes = 0;
+        int alturaRetangulo = 0;
+
+        for (i = 0; i < args.length; i++) { // for para verificar todos os argumentos
+            if (Objects.equals(args[i], args[0])) { // conferir arg[0] para ver se é uma forma
+                if ("triangulo".equals(args[0]) || "losangulo".equals(args[0]) || "retangulo".equals(args[0])) {
+                    forma = args[0];
+                    if (forma.equals("retangulo")) {
+                        if (isNumeric(args[2])) { // conferir a arg[2] para ve se é a dimensão do retangulo
+                             alturaRetangulo = Integer.parseInt(args[2]);
+                        } else {
+                            dimensaoInvalida();
+                            break;
+                        }
+                    }
+                }
+                else {
+                    dimensaoInvalida();
+                    break;
+                }
+            }
+            if (Objects.equals(args[i], args[1])) { // conferir arg[1] para ve se é uma dimensão
+                if (isNumeric(args[1])) {
+                     dimensoes = Integer.parseInt(args[1]);
+                    if (Objects.equals(args[0], "losangulo") && (dimensoes % 2) == 0) {
+                        System.out.println("É obrigatório que as dimensões do losangulo sejam ímpares");
+                    }
+                }
+                else {
+                    dimensaoInvalida();
+                }
+
+            }
+        }
+
+        switch (forma){
+            case "triangulo":
+                triangulo(dimensoes);
+                break;
+            case "losangulo":
+                losangulo(dimensoes);
+                break;
+            case "retangulo":
+                retangulo(dimensoes, alturaRetangulo);
+                break;
+            default:
+                dimensaoInvalida();
+        }
+
+
+    }
 
     public static boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");  // Verifica inteiros e decimais
     }
 
-    public static void main(String[] args) {
-        int i;
-        for (i = 0; i < args.length; i++) { // for para verificar todos os argumentos
-            if (args[i] == args[0]) { // conferir arg[0] para ver se é uma forma
-                if (args[0].equals("triangulo") || args[0].equals("losangulo") || args[0].equals("retangulo")) {
-                    String forma = args[0];
-                    if (forma.equals("retangulo")) {
-                        if (isNumeric(args[2])) { // conferir a arg[2] para ve se é a dimensão do retangulo
-                            int alturaRetangulo = Integer.parseInt(args[1]);
-                            System.out.println(alturaRetangulo);
-                        } else {
-                            System.out.println("Digite novamente conforme a ordem: forma/dimensões");
-                            break;
-                        }
-                    }
-                    System.out.println(forma);
+    public static void dimensaoInvalida(){
+        System.out.println("Digite novamente conforme a ordem: forma/dimensões");
+    }
+
+    public static void triangulo(int dimensao){
+        char[] triangulo = new char[dimensao];
+
+        for (int i = dimensao; i > 0; i--){
+            triangulo[i - 1] = '*';
+            for (int j = 0; j < dimensao; j++){
+                if (triangulo[j] != 0){
+                    System.out.print(triangulo[j]);
                 }
-
-            } else {
-                System.out.println("Digite novamente conforme a ordem: forma/dimensões");
-                break;
-            }
-        }
-        if (args[i] == args[1]) { // conferir arg[1] para ve se é uma dimensão
-            if (isNumeric(args[1])) {
-                int dimensoes = Integer.parseInt(args[1]);
-                if (args[0] == "losangulo" && (dimensoes % 2) == 1) {
-                    System.out.println("É obrigatório que as dimensões do losangulo sejam ímpares");
-                } else {
-                    System.out.println(dimensoes);
+                else {
+                    System.out.print(" ");
                 }
-            } else {
-                System.out.println("Digite novamente conforme a ordem: forma/dimensões");
             }
-
+            System.out.print("\n");
         }
+    }
 
+    public static void losangulo(int dimensao){
+        char[] losangulo = new char[dimensao];
+        int aux = 0;
+        int aux2 = 0;
+
+    }
+
+    public static void retangulo(int dimensao, int altura){
 
     }
 

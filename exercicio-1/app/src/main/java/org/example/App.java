@@ -93,11 +93,32 @@ public class App {
         Arrays.fill(losangulo, '*'); // função responsável por adicionar o * em cada posição. Obs: Sugestão da IDE
 
         for (int i = 0; i < dimensao; i++){
+            if (i == 0 || i == dimensao - 1){
+                for (int j = 0; j < dimensao; j++){
+                    if (i == aux){
+                        System.out.print(losangulo[j]);
+                    }
+                    else {
+                        System.out.print(" ");
+                    }
+                }
+            }
+            if (direita > 0 && esquerda > 0){
+                for (int j = 0; j < dimensao; j++){
+                    if (j == direita && j == dimensao - esquerda){
+                        System.out.print(" ");
+                    }
+                    else {
+                        System.out.print(losangulo[j]);
+                    }
+                }
+            }
+            System.out.print("\n");
 
+            direita++;
+            esquerda++;
         }
-
     }
-
     public static void retangulo(int dimensao, int altura){
         char[] retangulo = new char[dimensao];
 

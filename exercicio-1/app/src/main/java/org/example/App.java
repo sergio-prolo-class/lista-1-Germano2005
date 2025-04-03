@@ -86,37 +86,31 @@ public class App {
 
     public static void losangulo(int dimensao){
         char[] losangulo = new char[dimensao];
-        int aux = (dimensao + 1) / 2;
-        int direita = 0;
-        int esquerda = 0;
+        int meio = dimensao / 2;
 
-        Arrays.fill(losangulo, '*'); // função responsável por adicionar o * em cada posição. Obs: Sugestão da IDE
+        for (int i = 0; i <= meio; i++) { //primeira parte  do losango
+            Arrays.fill(losangulo, ' ');
 
-        for (int i = 0; i < dimensao; i++){
-            if (i == 0 || i == dimensao - 1){
-                for (int j = 0; j < dimensao; j++){
-                    if (i == aux){
-                        System.out.print(losangulo[j]);
-                    }
-                    else {
-                        System.out.print(" ");
-                    }
-                }
+            int esquerda = meio - i; // Calcula as posições onde os asteriscos devem estar
+            int direita = meio + i;
+
+            for (int j = esquerda; j <= direita; j++) { // Coloca os asteriscos nas posições calculadas
+                losangulo[j] = '*';
             }
-            if (direita > 0 && esquerda > 0){
-                for (int j = 0; j < dimensao; j++){
-                    if (j == direita && j == dimensao - esquerda){
-                        System.out.print(" ");
-                    }
-                    else {
-                        System.out.print(losangulo[j]);
-                    }
-                }
-            }
-            System.out.print("\n");
+            System.out.println(new String(losangulo));
+        }
 
-            direita++;
-            esquerda++;
+        for (int i = meio - 1; i >= 0; i--) { // segunda parte do losango
+            Arrays.fill(losangulo, ' ');
+
+            int esquerda = meio - i; // calcula as posições onde os asteriscos devem estar
+            int direita = meio + i;
+
+            for (int j = esquerda; j <= direita; j++) {
+                losangulo[j] = '*';
+            }
+
+            System.out.println(new String(losangulo));
         }
     }
     public static void retangulo(int dimensao, int altura){
@@ -124,13 +118,13 @@ public class App {
 
         Arrays.fill(retangulo, '*');// função responsável por adicionar o * em cada posição. Obs: Sugestão da IDE
 
-        for (int i = 0; i < altura; i++){
-            if (i == 0 || i == altura - 1){
+        for (int i = 0; i < altura; i++){ // for para iterar as linhas
+            if (i == 0 || i == altura - 1){ // se a linha for a incial ou final printa tudo
                 for (int j = 0; j < dimensao; j++){
                     System.out.print(retangulo[j]);
                 }
             }
-            else {
+            else { // se não faz um for nas linahs que não são inicial e final e mostra apenas a primeira e a ultima coluna
                 for (int j = 0; j < dimensao; j++){
                     if (j == 0 || j == dimensao - 1){
                         System.out.print(retangulo[j]);

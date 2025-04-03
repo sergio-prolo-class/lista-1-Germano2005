@@ -3,6 +3,7 @@
  */
 package org.example;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class App {
@@ -41,11 +42,9 @@ public class App {
                 else {
                     dimensaoInvalida();
                 }
-
             }
         }
-
-        switch (forma){
+        switch (forma){ // switch case para cada tipo de forma
             case "triangulo":
                 triangulo(dimensoes);
                 break;
@@ -58,8 +57,6 @@ public class App {
             default:
                 dimensaoInvalida();
         }
-
-
     }
 
     public static boolean isNumeric(String str) {
@@ -67,16 +64,16 @@ public class App {
     }
 
     public static void dimensaoInvalida(){
-        System.out.println("Digite novamente conforme a ordem: forma/dimensões");
+        System.out.println("Digite novamente conforme a ordem: forma/dimensões"); // mensagem de dimensões inválidas
     }
 
     public static void triangulo(int dimensao){
         char[] triangulo = new char[dimensao];
 
-        for (int i = dimensao; i > 0; i--){
+        for (int i = dimensao; i > 0; i--){ // for responsável por adicionar o * de forma decremental
             triangulo[i - 1] = '*';
-            for (int j = 0; j < dimensao; j++){
-                if (triangulo[j] != 0){
+            for (int j = 0; j < dimensao; j++){ // for responsável por mostrar na tela os triângulos
+                if (triangulo[j] != 0){ // verifica se a posição está vazia ou não
                     System.out.print(triangulo[j]);
                 }
                 else {
@@ -89,14 +86,40 @@ public class App {
 
     public static void losangulo(int dimensao){
         char[] losangulo = new char[dimensao];
-        int aux = 0;
-        int aux2 = 0;
+        int aux = (dimensao + 1) / 2;
+        int direita = 0;
+        int esquerda = 0;
+
+        Arrays.fill(losangulo, '*'); // função responsável por adicionar o * em cada posição. Obs: Sugestão da IDE
+
+        for (int i = 0; i < dimensao; i++){
+
+        }
 
     }
 
     public static void retangulo(int dimensao, int altura){
+        char[] retangulo = new char[dimensao];
 
+        Arrays.fill(retangulo, '*');// função responsável por adicionar o * em cada posição. Obs: Sugestão da IDE
+
+        for (int i = 0; i < altura; i++){
+            if (i == 0 || i == altura - 1){
+                for (int j = 0; j < dimensao; j++){
+                    System.out.print(retangulo[j]);
+                }
+            }
+            else {
+                for (int j = 0; j < dimensao; j++){
+                    if (j == 0 || j == dimensao - 1){
+                        System.out.print(retangulo[j]);
+                    }
+                    else {
+                        System.out.print(" ");
+                    }
+                }
+            }
+            System.out.print("\n");
+        }
     }
-
-
 }

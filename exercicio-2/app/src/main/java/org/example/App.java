@@ -3,6 +3,8 @@
  */
 package org.example;
 
+import java.text.DecimalFormat;
+
 public class App {
 
     public static void argumentoErrado(){
@@ -11,86 +13,115 @@ public class App {
 
     public static void main(String[] args) {
         String val1 = "", val2 = "";
-        String concat;
-        int val;
-        double mult = 404, tol = 404;
-        val1 = switch (args[0]) {
-            case "preto" -> "0";
-            case "marrom" -> "1";
-            case "vermelho" -> "2";
-            case "laranja" -> "3";
-            case "amarelo" -> "4";
-            case "verde" -> "5";
-            case "azul" -> "6";
-            case "violeta" -> "7";
-            case "cinza" -> "8";
-            case "branco" -> "9";
-            default -> val1;
-        };
-        if (val1.isEmpty()){
-            argumentoErrado();
-        }
-
-        val2 = switch (args[1]) {
-            case "preto" -> "0";
-            case "marrom" -> "1";
-            case "vermelho" -> "2";
-            case "laranja" -> "3";
-            case "amarelo" -> "4";
-            case "verde" -> "5";
-            case "azul" -> "6";
-            case "violeta" -> "7";
-            case "cinza" -> "8";
-            case "branco" -> "9";
-            default -> val2;
-        };
-
-        if (val2.isEmpty()){
-            argumentoErrado();
-        }
-
-        mult = switch (args[2]) {
-            case "preto" -> 1;
-            case "marrom" -> 10;
-            case "vermelho" -> 100;
-            case "laranja" -> 1000;
-            case "amarelo" -> 10000;
-            case "verde" -> 100000;
-            case "azul" -> 1000000;
-            case "violeta" -> 10000000;
-            case "cinza" -> 100000000;
-            case "branco" -> 1000000000;
-            case "ouro" -> 0.1;
-            case "prata" -> 0.01;
-            default -> mult;
-        };
-
-        if (mult == 404){
-            argumentoErrado();
-        }
-
-        if (args.length > 3){
-            tol = switch (args[3]) {
-                case "preto" -> 0;
-                case "marrom" -> 1;
-                case "vermelho" -> 2;
-                case "verde" -> 0.5;
-                case "azul" -> 0.25;
-                case "violeta" -> 0.1;
-                case "cinza" -> 0.05;
-                case "ouro" -> 5;
-                case "prata" -> 10;
-                default -> tol; // tolerância default
-
+        double mult = 404, tol = 20;
+        int i = 0;
+        if (args.length == 3 || args.length == 4){
+            val1 = switch (args[0]) {
+                case "preto" -> "0";
+                case "marrom" -> "1";
+                case "vermelho" -> "2";
+                case "laranja" -> "3";
+                case "amarelo" -> "4";
+                case "verde" -> "5";
+                case "azul" -> "6";
+                case "violeta" -> "7";
+                case "cinza" -> "8";
+                case "branco" -> "9";
+                default -> val1;
             };
+            if (val1.isEmpty()){
+                argumentoErrado();
+            }
+
+            val2 = switch (args[1]) {
+                case "preto" -> "0";
+                case "marrom" -> "1";
+                case "vermelho" -> "2";
+                case "laranja" -> "3";
+                case "amarelo" -> "4";
+                case "verde" -> "5";
+                case "azul" -> "6";
+                case "violeta" -> "7";
+                case "cinza" -> "8";
+                case "branco" -> "9";
+                default -> val2;
+            };
+
+            if (val2.isEmpty()){
+                argumentoErrado();
+            }
+
+            mult = switch (args[2]) {
+                case "preto" -> 1;
+                case "marrom" -> 10;
+                case "vermelho" -> 100;
+                case "laranja" -> 1000;
+                case "amarelo" -> 10000;
+                case "verde" -> 100000;
+                case "azul" -> 1000000;
+                case "violeta" -> 10000000;
+                case "cinza" -> 100000000;
+                case "branco" -> 1000000000;
+                case "ouro" -> 0.1;
+                case "prata" -> 0.01;
+                default -> mult;
+            };
+
             if (mult == 404){
                 argumentoErrado();
             }
+
+            if (args.length > 3){
+                tol = switch (args[3]) {
+                    case "preto" -> 0;
+                    case "marrom" -> 1;
+                    case "vermelho" -> 2;
+                    case "verde" -> 0.5;
+                    case "azul" -> 0.25;
+                    case "violeta" -> 0.1;
+                    case "cinza" -> 0.05;
+                    case "ouro" -> 5;
+                    case "prata" -> 10;
+                    default -> 404; // tolerância default
+
+                };
+                if (tol == 404){
+                    argumentoErrado();
+                }
+            }
+        }
+        else {
+            System.out.println("Erro: prescisa de no mínimo 3 args");
+            i = 1;
+        }
+        if (i == 0){
+            calculaOhms(val1, val2, mult, tol);
         }
 
-        concat = val1 + val2;
-        val = Integer.parseInt(concat);
+    }
 
+    public static void calculaOhms(String val1, String val2, double mult, double tol){
+        String concat;
+        String unidade = "";
+        concat = val1 + val2;
+        double val = Integer.parseInt(concat);
+
+        val = val * mult;
+
+        if (val >= 1000 && val < 1000000){
+            val = val / 1000;
+            unidade = "K";
+        } else if (val < 1000000000) {
+            unidade = "M";
+            val = val / 1000000;
+        }
+        else {
+            val = val / 1000000000;
+            unidade = "G";
+        }
+
+        System.out.println("Resistência: " + val + " " + unidade + " Ohms" + "(+- " + tol + "%)");
 
     }
+
 }

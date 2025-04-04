@@ -19,11 +19,17 @@ public class App {
                 if ("triangulo".equals(args[0]) || "losangulo".equals(args[0]) || "retangulo".equals(args[0])) {
                     forma = args[0];
                     if (forma.equals("retangulo")) {
-                        if (isNumeric(args[2])) { // conferir a arg[2] para ve se é a dimensão do retangulo
-                             alturaRetangulo = Integer.parseInt(args[2]);
-                        } else {
-                            dimensaoInvalida();
+                        if (args.length < 3){
+                            System.out.println("Você escolheu retangulo, e a quantidade de argumentos não corresponde"); // verificar se os argumrntos do retângulo estão de acordo
                             break;
+                        }
+                        else {
+                            if (isNumeric(args[2])) { // conferir a arg[2] para ve se é a dimensão do retangulo
+                                alturaRetangulo = Integer.parseInt(args[2]);
+                            } else {
+                                dimensaoInvalida();
+                                break;
+                            }
                         }
                     }
                 }
@@ -37,6 +43,8 @@ public class App {
                      dimensoes = Integer.parseInt(args[1]);
                     if (Objects.equals(args[0], "losangulo") && (dimensoes % 2) == 0) {
                         System.out.println("É obrigatório que as dimensões do losangulo sejam ímpares");
+                        forma = "erro";
+                        break;
                     }
                 }
                 else {

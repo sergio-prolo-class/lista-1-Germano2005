@@ -17,3 +17,17 @@ Este exercício tem como objetivo mostrar na tela do usuário os formatos: trian
 Abaixo está o exemplo de como o programa deve ser executado
 
 ![Minha foto](./exerc1.png)
+
+### Exercício - 2 - Decodificador de resistência
+
+Este exercício tem o objetivo de decodificar as resistências de um resistor através de suas faixas coloridas em seu componente.
+
+* Onde as duas primeiras faixas representam os dígitos dos valores iniciais
+
+* A terceira faixa representa o multiplicador desses dígitos
+
+* A quarta e última faixa (que é opcional) representa a tolerância da resistência
+
+* Sendo que por default ela é de 20%
+
+Abaixo está o exemplo de como o programa deve ser executado

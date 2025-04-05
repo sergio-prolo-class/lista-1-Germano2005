@@ -22,6 +22,8 @@ Abaixo está o exemplo de como o programa deve ser executado
 
 Este exercício tem o objetivo de decodificar as resistências de um resistor através de suas faixas coloridas em seu componente.
 
+![Minha foto](./tabela.avif)
+
 * Onde as duas primeiras faixas representam os dígitos dos valores iniciais
 
 * A terceira faixa representa o multiplicador desses dígitos
@@ -31,3 +33,5 @@ Este exercício tem o objetivo de decodificar as resistências de um resistor at
 * Sendo que por default ela é de 20%
 
 Abaixo está o exemplo de como o programa deve ser executado
+
+![Minha foto](./exerc2.png)

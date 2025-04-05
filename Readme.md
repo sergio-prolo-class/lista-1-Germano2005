@@ -4,7 +4,7 @@
 
 ## Esté repositório é destinado as resoluções da lista de exercícios sobre o Java
 
-### Exercício - 1
+### Exercício - 1 - Arte ASCII
 
 Este exercício tem como objetivo mostrar na tela do usuário os formatos: triangulo, losangulo e retangulo com suas respectivas dimensões.
 

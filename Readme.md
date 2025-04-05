@@ -16,5 +16,5 @@ Este exercício tem como objetivo mostrar na tela do usuário os formatos: trian
 
 Abaixo está o exemplo de como o programa deve ser executado
 
-
+![Execução do programa](./Captura de tela de 2025-04-04 09-26-31.png)
 

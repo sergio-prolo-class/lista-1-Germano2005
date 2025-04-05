@@ -16,4 +16,4 @@ Este exercício tem como objetivo mostrar na tela do usuário os formatos: trian
 
 Abaixo está o exemplo de como o programa deve ser executado
 
-
+![Minha foto](./exerc1.png)

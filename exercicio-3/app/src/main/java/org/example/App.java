@@ -7,41 +7,151 @@ import java.util.Random;
 
 public class App {
     public static void main(String[] args) {
-        char[][] tabuleiro = {{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.',},
-                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.',},
-                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.',},
-                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.',},
-                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.',},
-                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.',},
-                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.',},
-                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.',},
-                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.',},
-                {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.',},}; //Matriz
+        char[][] tabuleiro = new char[10][10]; //Matriz
 
-        Random numAleatorio1 = new Random();
-        Random numAleatorio2 = new Random();
-
-        int linha = numAleatorio1.nextInt(9);
-        int coluna = numAleatorio2.nextInt(9);
-
-        System.out.println(linha);
-        System.out.println(coluna);
-
-        //Porta avião
-        for (int i = 0; i < 5; i++){
-            if (coluna >= 6){
-                System.out.print("Não deu para colocar");
-                break;
+        for (int i = 0; i < 10; i++){ // inicializando a matriz
+            for (int j = 0; j < 10; j++){
+                tabuleiro[i][j] = '.';
             }
-            tabuleiro[linha][coluna + i] = 'P';
         }
 
+        int linha = 0, coluna = 0;
+        boolean direcao = true;
+
+        for (int i = 0; i < 5; i++){ // for para iteração a quantidade de navios que o jogo tem
+            
+            linha = sortPosicoes(linha); // sorteia linha
+            coluna = sortPosicoes(coluna); // sorteia coluna
+            direcao = sortDirecoes(direcao); // sorteia direção: True = horizontal; False = vertical
+
+            switch (i){
+                case 0: portaAviao(linha, coluna, tabuleiro, direcao);break;
+                case 1: encouracador(linha, coluna, tabuleiro, direcao);break;
+                case 2: cruzador(linha, coluna, tabuleiro, direcao);break;
+                case 3: submarino(linha, coluna, tabuleiro, direcao);break;
+                case 4: contratorpedeiro(linha, coluna, tabuleiro, direcao);break;
+                default: System.out.println("Erro!");
+            }
+        }
+
+        //for para mostrar o tabuleiro gerado
         for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
                 System.out.print(tabuleiro[i][j]);
+                System.out.print(" ");
             }
             System.out.print("\n");
         }
+    }
 
+    public static void portaAviao(int linha, int coluna, char[][] tabuleiro, boolean direcao){
+        int tamanho = 5;
+        char simbolo = 'P';
+        escolheDirecao(direcao, linha, coluna, tabuleiro, tamanho, simbolo);
+
+    }
+
+    public static void encouracador(int linha, int coluna, char[][] tabuleiro, boolean direcao){
+        int tamanho = 4;
+        char simbolo = 'E';
+        escolheDirecao(direcao, linha, coluna, tabuleiro, tamanho, simbolo);
+    }
+
+    public static void cruzador(int linha, int coluna, char[][] tabuleiro, boolean direcao){
+        int tamanho = 3;
+        char simbolo = 'C';
+        escolheDirecao(direcao, linha, coluna, tabuleiro, tamanho, simbolo);
+    }
+
+    public static void submarino(int linha, int coluna, char[][] tabuleiro, boolean direcao){
+        int tamanho = 3;
+        char simbolo = 'S';
+        escolheDirecao(direcao, linha, coluna, tabuleiro, tamanho, simbolo);
+    }
+
+    public static void contratorpedeiro(int linha, int coluna, char[][] tabuleiro, boolean direcao){
+        int tamanho = 2;
+        char simbolo = 'N';
+        escolheDirecao(direcao, linha, coluna, tabuleiro, tamanho, simbolo);
+    }
+    
+    public static int sortPosicoes(int num){
+        Random numAleatorio = new Random();
+        
+        return num = numAleatorio.nextInt(9);
+    }
+    
+    public static boolean sortDirecoes(boolean val){
+        Random numAleatorio = new Random();
+        
+        return val = numAleatorio.nextBoolean();
+    }
+
+    public static void escolheDirecao(boolean direcao, int linha, int coluna, char[][] tabuleiro, int tamanho, char simbolo){
+        if (direcao){ //escolhe a direcao
+            horizontal(linha, coluna, tabuleiro, tamanho, simbolo);
+        }
+        else{
+            vertical(linha, coluna, tabuleiro, tamanho, simbolo);
+        }
+    }
+
+    public static void horizontal(int linha, int coluna, char[][] tabuleiro, int tamanho, char simbolo){
+        boolean podeCriar = verificaLinha(linha, coluna, tabuleiro, tamanho);
+        if (podeCriar){ // se toda a linha estiver de acordo, pode criar navio
+            for (int j = 0; j < tamanho; j++){
+                tabuleiro[linha][coluna + j] = simbolo; // atribui o símbolo do navio nas posições sorteadas
+            }
+        }
+        else {
+            linha = sortPosicoes(linha);
+            coluna = sortPosicoes(coluna);
+            horizontal(linha, coluna, tabuleiro, tamanho, simbolo);
+        }
+
+    }
+
+    public static void vertical(int linha, int coluna, char[][] tabuleiro, int tamanho, char simbolo){
+        boolean podeCriar = verificaColuna(linha, coluna, tabuleiro, tamanho);
+        if (podeCriar){ // se toda a coluna foi verificada e estiver de acordo, pode criar o navio
+            for (int j = 0; j < tamanho; j++){
+                tabuleiro[linha + j][coluna] = simbolo; // atribui o símbolo do navio nas posições sorteadas
+            }
+        }
+        else {
+            linha = sortPosicoes(linha);
+            coluna = sortPosicoes(coluna);
+            vertical(linha, coluna, tabuleiro, tamanho, simbolo);
+        }
+
+    }
+
+    public static boolean verificaLinha(int linha, int coluna, char[][] tabuleiro, int tamanho){
+
+        if (coluna + tamanho > 10) { // verifica se não passa do limite do tabuleiro
+            return false;
+        }
+
+        for (int j = 0; j < tamanho; j++){ // verifica se todas as posições estão livres
+            if (tabuleiro[linha][coluna + j] != '.') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean verificaColuna(int linha, int coluna, char[][] tabuleiro, int tamanho){
+
+        if (linha + tamanho > 10) { // verifica se não passa do limite do tabuleiro
+            return false;
+        }
+
+
+        for (int i = 0; i < tamanho; i++){ // verifica se todas as posições estão livres
+            if (tabuleiro[linha + i][coluna] != '.') {
+                return false;
+            }
+        }
+        return true;
     }
 }

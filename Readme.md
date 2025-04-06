@@ -35,3 +35,17 @@ Este exercício tem o objetivo de decodificar as resistências de um resistor at
 Abaixo está o exemplo de como o programa deve ser executado
 
 ![Minha foto](./exerc2.png)
+
+### Exercício - 3  - Tabuleiro de batalha naval
+
+Este exercício tem como objetivo de fazer um programa que gera-se posições aleatórias dos navios presentes no jogo em um tabuleiro com dimensões 10X10
+
+![Minha foto](./naval.png)
+
+* Os navios devem ser gerados aleatóriamente, tando sua direção(vertical ou horizontal) com suas posições iniciais como linha e coluna
+
+* Nenhum navio deve-se sobrepor ao outro
+
+Abaixo está um exemplo de como o programa deve ser executado
+
+![Minha foto](./exerc3.png)

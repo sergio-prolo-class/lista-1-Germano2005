@@ -49,3 +49,22 @@ Este exercício tem como objetivo de fazer um programa que gera-se posições al
 Abaixo está um exemplo de como o programa deve ser executado
 
 ![Minha foto](./exerc3.png)
+
+### Exercício - 4 - Validação de tabuleiro
+
+Este exercício tem como objetivo fazer a implementação de um programa que verifica se o tabuleiro gerado no exercício anterior é válido conforme as seguintes especificações
+
+* não tem a dimensão correta de 10×10 casas
+  
+* inclui navios desconhecidos
+
+* não inclui um navio de cada tipo 
+
+* inclui múltiplos navios do mesmo tipo
+
+* inclui navios que não estão na horizontal ou vertical
+
+Abaixo está um exemplo de como o programa deve ser executado
+
+![Minha foto](./exerc4.png)
+  
